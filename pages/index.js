@@ -3,23 +3,29 @@ import InitialPage from "./InitialPage";
 import SolvingPage from "./SolvingPage";
 
 export default function Home() {
-  const [isSolvingPage, setSolvingPage] = useState(false);
-
-  const handleSetSolvingPage = (value) => {
-    setSolvingPage(value);
-  };
+  const [currentPage, setPage] = useState("home");
 
   const PageToShow = () => {
-    return isSolvingPage ? (
-      <SolvingPage></SolvingPage>
-    ) : (
-      <InitialPage buttonHandler={handleSetSolvingPage}></InitialPage>
-    );
+    switch (currentPage) {
+      case "home":
+        return <InitialPage setPage={setPage}></InitialPage>;
+      case "solve":
+        return <SolvingPage setPage={setPage}></SolvingPage>;
+      case "thanks":
+        return <ThankYouPage setPage={setPage}></ThankYouPage>;
+    }
   };
 
   return (
-    <>
+    <div style={pageStyle}>
       <PageToShow></PageToShow>
-    </>
+    </div>
   );
 }
+
+const pageStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+};
