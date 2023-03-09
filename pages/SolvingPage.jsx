@@ -1,10 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SolvingCanvas from "./SolvingCanvas";
 import Logo from "./Logo";
 import getObjectAfterDelay from "./api/getImage";
 import postObjectAfterDelay from "./api/postSubmission";
-import exampleImage from "../images/vid_4_600.jpg";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 export default function SolvingPage({ setPage }) {
   const ref = useRef(null);
@@ -12,20 +12,20 @@ export default function SolvingPage({ setPage }) {
   const [image, setImage] = useState(null);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const [leftOffset, setLeftOffset] = useState(0);
+  const [topOffset, setTopOffset] = useState(0);
   const [mousePos, setMousePos] = useState({});
   const [startingMousePos, setStartingMousePos] = useState({});
 
-  useLayoutEffect(() => {
-    setWidth(ref.current.offsetWidth);
-    setHeight(
-      (ref.current.offsetWidth * exampleImage.height) / exampleImage.width
-    );
-  }, []);
-
   useEffect(() => {
     getObjectAfterDelay().then((res) => {
-      console.log(res);
       setImage(res);
+      setWidth(ref.current.offsetWidth);
+      setHeight(
+        (ref.current.offsetWidth * res.imageDOM.height) / res.imageDOM.width
+      );
+      setLeftOffset(ref.current.offsetLeft);
+      setTopOffset(ref.current.offsetTop);
     });
   }, []);
 
@@ -56,28 +56,45 @@ export default function SolvingPage({ setPage }) {
     setPage("thanks");
   };
 
+  const transformOptions = {
+    initialScale: 1,
+    minScale: 0.5,
+    maxScale: 1,
+  };
+
   return (
     <>
       <Logo></Logo>
       <div ref={ref} style={testContainerStyle}>
-        {image && (
-          <Image
-            style={imageStyle}
-            src={"/images/" + image.fileName}
-            alt="Test image"
-            width={width}
-            height={height}
-          ></Image>
-        )}
-        <SolvingCanvas
-          style={canvasStyle}
-          width={width}
-          height={height}
-          mousePos={mousePos}
-          startingMousePos={startingMousePos}
-          setMousePos={setMousePos}
-          setStartingMousePos={setStartingMousePos}
-        ></SolvingCanvas>
+        <TransformWrapper
+          options={transformOptions}
+          panning={{ disabled: true }}
+        >
+          <TransformComponent>
+            <div style={{ display: "grid", width: "100%", height: "100%" }}>
+              {image && (
+                <Image
+                  style={imageStyle}
+                  src={"/images/" + image.fileName}
+                  alt="Test image"
+                  width={width}
+                  height={height}
+                ></Image>
+              )}
+              <SolvingCanvas
+                style={canvasStyle}
+                width={width}
+                height={height}
+                leftOffset={leftOffset}
+                topOffset={topOffset}
+                mousePos={mousePos}
+                startingMousePos={startingMousePos}
+                setMousePos={setMousePos}
+                setStartingMousePos={setStartingMousePos}
+              ></SolvingCanvas>
+            </div>
+          </TransformComponent>
+        </TransformWrapper>
       </div>
       <div style={buttonStyle}>
         <button onClick={handleConfirmation}>Confirm selection</button>
@@ -86,11 +103,7 @@ export default function SolvingPage({ setPage }) {
   );
 }
 
-const testContainerStyle = {
-  display: "grid",
-  width: "100%",
-  height: "100%",
-};
+const testContainerStyle = { width: "100%", height: "100%" };
 const imageStyle = { gridColumn: 1, gridRow: 1 };
 const canvasStyle = { gridColumn: 1, gridRow: 1 };
 const buttonStyle = { margin: "0 auto", textAlign: "center", padding: "30px" };

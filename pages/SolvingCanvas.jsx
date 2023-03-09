@@ -3,23 +3,35 @@ import { useEffect, useRef } from "react";
 export default function SolvingCanvas(props) {
   const canvasRef = useRef(null);
 
+  const getCoordinates = (event) => {
+    const parentTransform =
+      event.target.parentElement.parentNode.style.transform;
+    const array = parentTransform.split(" ");
+
+    const xOffset = Number(array[0].slice(10, -3));
+    const yOffset = Number(array[1].slice(0, -3));
+    const scale = Number(array[2].slice(6, -1));
+
+    const x = (event.touches[0].clientX - xOffset - props.leftOffset) / scale;
+    const y = (event.touches[0].clientY - yOffset - props.topOffset) / scale;
+
+    return { x, y };
+  };
+
   const handleTouchStart = (event) => {
-    props.setStartingMousePos({
-      x: event.touches[0].clientX - event.target.offsetLeft,
-      y: event.touches[0].clientY - event.target.offsetTop,
-    });
+    props.setStartingMousePos(getCoordinates(event));
   };
 
   const handleTouchMove = (event) => {
-    let x = event.touches[0].clientX - event.target.offsetLeft;
-    x = x < 0 ? 0 : x;
-    x = x > event.target.width ? event.target.width : x;
+    const coords = getCoordinates(event);
 
-    let y = event.touches[0].clientY - event.target.offsetTop;
-    y = y < 0 ? 0 : y;
-    y = y > event.target.height ? event.target.height : y;
+    coords.x = coords.x < 0 ? 0 : coords.x;
+    coords.x = coords.x > event.target.width ? event.target.width : coords.x;
 
-    props.setMousePos({ x, y });
+    coords.y = coords.y < 0 ? 0 : coords.y;
+    coords.y = coords.y > event.target.height ? event.target.height : coords.y;
+
+    props.setMousePos(coords);
   };
 
   useEffect(() => {
@@ -36,6 +48,7 @@ export default function SolvingCanvas(props) {
     context.strokeStyle = "rgba(255, 0, 0, 1)";
     context.beginPath();
     context.rect(topLeftX, topLeftY, width, height);
+    //context.rect(0, 0, 100, 100);
     context.stroke();
   }, [props.mousePos]);
 
