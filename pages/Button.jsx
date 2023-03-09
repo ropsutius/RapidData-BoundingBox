@@ -51,6 +51,7 @@ const buttonStyle = {
   fontSize: "30px",
   borderRadius: "50px",
   textTransform: "capitalize",
+  filter: "drop-shadow(6px 6px 8px #505050)",
 };
 
 const flexItem = {
