@@ -1,9 +1,10 @@
 import InitialPage from "./InitialPage";
+import SolvingPage from "./SolvingPage";
 
 export default function Home() {
   return (
     <>
-      <InitialPage></InitialPage>
+      <SolvingPage></SolvingPage>
     </>
   );
 }
