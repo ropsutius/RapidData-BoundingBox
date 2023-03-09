@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
 
 function Welcome() {
@@ -9,16 +10,30 @@ function Welcome() {
   );
 }
 
-function NextButton() {
-  return <button>Next</button>;
-}
+export default function InitialPage({ buttonHandler }) {
+  const [timeLeft, setTimeLeft] = useState(5);
 
-export default function InitialPage() {
+  const handleClick = () => {
+    return buttonHandler(true);
+  };
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const interval = setInterval(
+        () => setTimeLeft((time) => (time -= 1)),
+        1000
+      );
+      return () => clearInterval(interval);
+    } else {
+      return handleClick();
+    }
+  });
+
   return (
     <>
       <Logo></Logo>
       <Welcome></Welcome>
-      <NextButton></NextButton>
+      <button onClick={handleClick}>Next ({timeLeft})</button>
     </>
   );
 }
