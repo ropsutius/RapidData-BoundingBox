@@ -4,10 +4,6 @@ import Logo from "./Logo";
 export default function InitialPage({ setPage }) {
   const [timeLeft, setTimeLeft] = useState(5);
 
-  const handleClick = () => {
-    return setPage("solve");
-  };
-
   useEffect(() => {
     if (timeLeft > 0) {
       const interval = setInterval(
@@ -16,7 +12,7 @@ export default function InitialPage({ setPage }) {
       );
       return () => clearInterval(interval);
     } else {
-      return handleClick();
+      return setPage("solve");
     }
   });
 
@@ -27,7 +23,7 @@ export default function InitialPage({ setPage }) {
         <p>Draw a box around the car in the image</p>
         <p>Click next to start!</p>
       </div>
-      <button onClick={handleClick}>Next ({timeLeft})</button>
+      <button onClick={() => setPage("solve")}>Next ({timeLeft})</button>
     </>
   );
 }

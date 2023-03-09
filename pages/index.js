@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InitialPage from "./InitialPage";
 import SolvingPage from "./SolvingPage";
+import ThankYouPage from "./ThankYouPage";
 
 export default function Home() {
   const [currentPage, setPage] = useState("home");
