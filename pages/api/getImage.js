@@ -13,8 +13,9 @@ const imageFileNames = [
 ];
 
 export default async function getObjectAfterDelay() {
-  const randInt = Math.floor(Math.random() * 12);
+  const randInt = Math.floor(Math.random() * 11);
   const imageName = imageFileNames[randInt];
+
   return new Promise((resolve) => {
     setTimeout(() => {
       const myObject = {
