@@ -57,7 +57,7 @@ export default function SolvingPage({ setPage }) {
       100 - (Math.max(mousePos.y, startingMousePos.y) / height) * 100;
 
     await postObjectAfterDelay({
-      id: "abc",
+      id: image.id,
       boundingBox: {
         topLeft: { x: topLeftX, y: topLeftY },
         bottomRight: { x: bottomRightX, y: bottomRightY },
@@ -82,7 +82,7 @@ export default function SolvingPage({ setPage }) {
           panning={{ disabled: true }}
         >
           <TransformComponent>
-            <div style={{ display: "grid", width: "100%", height: "100%" }}>
+            <div style={{ display: "grid" }}>
               {image && (
                 <Image
                   style={imageStyle}
@@ -109,7 +109,7 @@ export default function SolvingPage({ setPage }) {
       </div>
       <Button
         handler={handleConfirmation}
-        text="Confirm selection"
+        text="Submit"
         isDisabled={isDisabled}
       ></Button>
     </>

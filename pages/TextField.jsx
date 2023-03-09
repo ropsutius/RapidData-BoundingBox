@@ -1,7 +1,7 @@
-export default function TextField({ text }) {
+export default function TextField({ text, fontSize }) {
   return (
     <div style={textContainerStyle}>
-      <p style={textStyle}>{text}</p>
+      <p style={{ ...textStyle, fontSize }}>{text}</p>
     </div>
   );
 }
@@ -12,11 +12,10 @@ const textContainerStyle = {
 };
 
 const textStyle = {
-  fontFamily: "Helvetica",
+  fontFamily: "Quicksand, sans-serif",
   padding: "15px 32px",
   textAlign: "center",
   textDecoration: "none",
   display: "inline-block",
-  fontSize: "25px",
   color: "#0077FF",
 };

@@ -21,8 +21,14 @@ export default function InitialPage({ setPage }) {
   return (
     <>
       <Logo></Logo>
-      <TextField text="You can skip this ad by playing a quick game!"></TextField>
-      <TextField text="Draw a box around the car in the image. You can use two fingers to zoom in on the image!"></TextField>
+      <TextField
+        text="You can skip this ad by playing a quick game!"
+        fontSize="25px"
+      ></TextField>
+      <TextField
+        text="Draw a box around the car in the image. You can use two fingers to zoom in on the image!"
+        fontSize="25px"
+      ></TextField>
       <Button
         handler={() => setPage("solve")}
         text={`Start (${timeLeft})`}

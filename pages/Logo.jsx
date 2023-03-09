@@ -9,4 +9,9 @@ export default function Logo() {
   );
 }
 
-const logoStyle = { margin: "0 auto", padding: "30px", paddingBottom: "25%" };
+const logoStyle = {
+  margin: "0 auto",
+  padding: "30px",
+  paddingBottom: "25%",
+  filter: "drop-shadow(3px 3px 5px grey)",
+};
