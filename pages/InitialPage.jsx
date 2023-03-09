@@ -6,7 +6,7 @@ import TextField from "./TextField";
 export default function InitialPage({ setPage }) {
   const [timeLeft, setTimeLeft] = useState(5);
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (timeLeft > 0) {
       const interval = setInterval(
         () => setTimeLeft((time) => (time -= 1)),
@@ -16,7 +16,7 @@ export default function InitialPage({ setPage }) {
     } else {
       return setPage("solve");
     }
-  });*/
+  });
 
   return (
     <>
