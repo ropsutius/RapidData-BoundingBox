@@ -29,6 +29,12 @@ export default function SolvingPage({ setPage }) {
   });
 
   const handleConfirmation = async () => {
+    if (
+      Object.keys(mousePos).length === 0 ||
+      Object.keys(startingMousePos).length === 0
+    )
+      return;
+
     const topLeftX = (Math.min(mousePos.x, startingMousePos.x) / width) * 100;
     const topLeftY =
       100 - (Math.min(mousePos.y, startingMousePos.y) / height) * 100;
