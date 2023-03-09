@@ -16,12 +16,16 @@ export default async function getObjectAfterDelay() {
   const randInt = Math.floor(Math.random() * 11);
   const imageName = imageFileNames[randInt];
 
+  const image = new Image();
+  image.src = "../images/" + imageName;
+
   return new Promise((resolve) => {
     setTimeout(() => {
       const myObject = {
         id: imageName,
         fileName: imageName,
         target: "car",
+        imageDOM: image,
       };
       resolve(myObject);
     }, 300);
