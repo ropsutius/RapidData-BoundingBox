@@ -40,18 +40,6 @@ export default function SolvingPage() {
     } else return null;
   };*/
 
-  /*setMousePos({
-      x:
-        ((event.touches[0].clientX - event.target.offsetLeft) /
-          event.target.width) *
-        100,
-      y:
-        100 -
-        ((event.touches[0].clientY - event.target.offsetTop) /
-          event.target.height) *
-          100,
-    });*/
-
   const handleConfirmation = () => {
     const topLeftX = (Math.min(mousePos.x, startingMousePos.x) / width) * 100;
     const topLeftY =

@@ -1,19 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function SolvingCanvas(props) {
   const canvasRef = useRef(null);
-
-  /*setMousePos({
-      x:
-        ((event.touches[0].clientX - event.target.offsetLeft) /
-          event.target.width) *
-        100,
-      y:
-        100 -
-        ((event.touches[0].clientY - event.target.offsetTop) /
-          event.target.height) *
-          100,
-    });*/
 
   const handleTouchStart = (event) => {
     props.setStartingMousePos({
