@@ -4,8 +4,9 @@ import getObjectAfterDelay from "./api/getImage";
 import Image from "next/image";
 import exampleImage from "../images/vid_4_600.jpg";
 import SolvingCanvas from "./SolvingCanvas";
+import postObjectAfterDelay from "./api/postSubmission";
 
-export default function SolvingPage() {
+export default function SolvingPage({ setPage }) {
   const ref = useRef(null);
 
   const [image, setImage] = useState(null);
@@ -27,20 +28,7 @@ export default function SolvingPage() {
     });
   });
 
-  /*const testImage = () => {
-    if (image) {
-      return (
-        <Image
-          src={"/../images/" + image.fileName}
-          width="100"
-          height="100"
-          alt="Test image"
-        ></Image>
-      );
-    } else return null;
-  };*/
-
-  const handleConfirmation = () => {
+  const handleConfirmation = async () => {
     const topLeftX = (Math.min(mousePos.x, startingMousePos.x) / width) * 100;
     const topLeftY =
       100 - (Math.min(mousePos.y, startingMousePos.y) / height) * 100;
@@ -50,13 +38,15 @@ export default function SolvingPage() {
     const bottomRightY =
       100 - (Math.max(mousePos.y, startingMousePos.y) / height) * 100;
 
-    console.log({
+    await postObjectAfterDelay({
       id: "abc",
       boundingBox: {
         topLeft: { x: topLeftX, y: topLeftY },
         bottomRight: { x: bottomRightX, y: bottomRightY },
       },
     });
+
+    setPage("thanks");
   };
 
   return (
@@ -80,10 +70,8 @@ export default function SolvingPage() {
           setStartingMousePos={setStartingMousePos}
         ></SolvingCanvas>
       </div>
-      <div>
-        <button style={buttonStyle} onClick={handleConfirmation}>
-          Confirm selection
-        </button>
+      <div style={buttonStyle}>
+        <button onClick={handleConfirmation}>Confirm selection</button>
       </div>
     </>
   );
@@ -96,4 +84,4 @@ const testContainerStyle = {
 };
 const imageStyle = { gridColumn: 1, gridRow: 1 };
 const canvasStyle = { gridColumn: 1, gridRow: 1 };
-const buttonStyle = { margin: "0 auto", textAlign: "center" };
+const buttonStyle = { margin: "0 auto", textAlign: "center", padding: "30px" };

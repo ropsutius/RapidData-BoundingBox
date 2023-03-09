@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
 
-function Welcome() {
-  return (
-    <>
-      <p>Draw a box around the car in the image</p>
-      <p>Click next to start!</p>
-    </>
-  );
-}
-
-export default function InitialPage({ buttonHandler }) {
+export default function InitialPage({ setPage }) {
   const [timeLeft, setTimeLeft] = useState(5);
 
   const handleClick = () => {
-    return buttonHandler(true);
+    return setPage("solve");
   };
 
   useEffect(() => {
@@ -32,8 +23,13 @@ export default function InitialPage({ buttonHandler }) {
   return (
     <>
       <Logo></Logo>
-      <Welcome></Welcome>
+      <div style={welcomeStyle}>
+        <p>Draw a box around the car in the image</p>
+        <p>Click next to start!</p>
+      </div>
       <button onClick={handleClick}>Next ({timeLeft})</button>
     </>
   );
 }
+
+const welcomeStyle = { textAlign: "center", padding: "30px" };
