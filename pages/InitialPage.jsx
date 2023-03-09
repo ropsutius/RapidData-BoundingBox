@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import Button from "./Button";
 import Logo from "./Logo";
+import TextField from "./TextField";
 
 export default function InitialPage({ setPage }) {
   const [timeLeft, setTimeLeft] = useState(5);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (timeLeft > 0) {
       const interval = setInterval(
         () => setTimeLeft((time) => (time -= 1)),
@@ -14,18 +16,18 @@ export default function InitialPage({ setPage }) {
     } else {
       return setPage("solve");
     }
-  });
+  });*/
 
   return (
     <>
       <Logo></Logo>
-      <div style={welcomeStyle}>
-        <p>Draw a box around the car in the image</p>
-        <p>Click next to start!</p>
-      </div>
-      <button onClick={() => setPage("solve")}>Next ({timeLeft})</button>
+      <TextField text="You can skip this ad by playing a quick game!"></TextField>
+      <TextField text="Draw a box around the car in the image. You can use two fingers to zoom in on the image!"></TextField>
+      <Button
+        handler={() => setPage("solve")}
+        text={`Start (${timeLeft})`}
+        isDisabled={false}
+      ></Button>
     </>
   );
 }
-
-const welcomeStyle = { textAlign: "center", padding: "30px" };

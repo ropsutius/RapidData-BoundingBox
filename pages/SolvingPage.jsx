@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SolvingCanvas from "./SolvingCanvas";
 import Logo from "./Logo";
+import Button from "./Button";
 import getObjectAfterDelay from "./api/getImage";
 import postObjectAfterDelay from "./api/postSubmission";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
@@ -16,6 +17,7 @@ export default function SolvingPage({ setPage }) {
   const [topOffset, setTopOffset] = useState(0);
   const [mousePos, setMousePos] = useState({});
   const [startingMousePos, setStartingMousePos] = useState({});
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     getObjectAfterDelay().then((res) => {
@@ -28,6 +30,15 @@ export default function SolvingPage({ setPage }) {
       setTopOffset(ref.current.offsetTop);
     });
   }, []);
+
+  useEffect(() => {
+    if (
+      Object.keys(mousePos).length === 0 ||
+      Object.keys(startingMousePos).length === 0
+    )
+      setIsDisabled(true);
+    else setIsDisabled(false);
+  }, [mousePos]);
 
   const handleConfirmation = async () => {
     if (
@@ -96,9 +107,11 @@ export default function SolvingPage({ setPage }) {
           </TransformComponent>
         </TransformWrapper>
       </div>
-      <div style={buttonStyle}>
-        <button onClick={handleConfirmation}>Confirm selection</button>
-      </div>
+      <Button
+        handler={handleConfirmation}
+        text="Confirm selection"
+        isDisabled={isDisabled}
+      ></Button>
     </>
   );
 }
@@ -106,4 +119,3 @@ export default function SolvingPage({ setPage }) {
 const testContainerStyle = { width: "100%", height: "100%" };
 const imageStyle = { gridColumn: 1, gridRow: 1 };
 const canvasStyle = { gridColumn: 1, gridRow: 1 };
-const buttonStyle = { margin: "0 auto", textAlign: "center", padding: "30px" };

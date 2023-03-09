@@ -1,18 +1,18 @@
 import Logo from "./Logo";
+import Button from "./Button";
+import TextField from "./TextField";
 
 export default function ThankYouPage({ setPage }) {
   return (
     <>
       <Logo></Logo>
-      <div style={thankYouStyle}>
-        <p>Thank you for submitting your answer!</p>
-      </div>
-      <div style={buttonStyle}>
-        <button onClick={() => setPage("home")}>Continue</button>
-      </div>
+      <TextField text="GREAT!"></TextField>
+      <TextField text="Thank you for submitting your answer!"></TextField>
+      <Button
+        handler={() => setPage("home")}
+        text="Continue"
+        isDisabled={false}
+      ></Button>
     </>
   );
 }
-
-const thankYouStyle = { textAlign: "center", padding: "30px" };
-const buttonStyle = { margin: "0 auto", textAlign: "center", padding: "30px" };
