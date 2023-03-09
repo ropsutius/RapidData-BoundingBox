@@ -1,10 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import Image from "next/image";
+import SolvingCanvas from "./SolvingCanvas";
 import Logo from "./Logo";
 import getObjectAfterDelay from "./api/getImage";
-import Image from "next/image";
-import exampleImage from "../images/vid_4_600.jpg";
-import SolvingCanvas from "./SolvingCanvas";
 import postObjectAfterDelay from "./api/postSubmission";
+import exampleImage from "../images/vid_4_600.jpg";
 
 export default function SolvingPage({ setPage }) {
   const ref = useRef(null);
@@ -24,9 +24,10 @@ export default function SolvingPage({ setPage }) {
 
   useEffect(() => {
     getObjectAfterDelay().then((res) => {
+      console.log(res);
       setImage(res);
     });
-  });
+  }, []);
 
   const handleConfirmation = async () => {
     if (
@@ -59,13 +60,15 @@ export default function SolvingPage({ setPage }) {
     <>
       <Logo></Logo>
       <div ref={ref} style={testContainerStyle}>
-        <Image
-          style={imageStyle}
-          src={exampleImage}
-          alt="Test image"
-          width={width}
-          height={height}
-        ></Image>
+        {image && (
+          <Image
+            style={imageStyle}
+            src={"/images/" + image.fileName}
+            alt="Test image"
+            width={width}
+            height={height}
+          ></Image>
+        )}
         <SolvingCanvas
           style={canvasStyle}
           width={width}
