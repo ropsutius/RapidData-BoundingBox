@@ -1,6 +1,6 @@
-import Logo from "./Logo";
-import Button from "./Button";
-import TextField from "./TextField";
+import Logo from './components/Logo';
+import Button from './components/Button';
+import TextField from './components/TextField';
 
 export default function ThankYouPage({ setPage }) {
   return (
@@ -12,7 +12,7 @@ export default function ThankYouPage({ setPage }) {
         fontSize="25px"
       ></TextField>
       <Button
-        handler={() => setPage("home")}
+        handler={() => setPage('home')}
         text="Continue"
         isDisabled={false}
       ></Button>
