@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import Button from "./Button";
-import Logo from "./Logo";
-import TextField from "./TextField";
+import { useEffect, useState } from 'react';
+import Button from './components/Button';
+import Logo from './components/Logo';
+import TextField from './components/TextField';
 
 export default function InitialPage({ setPage }) {
   const [timeLeft, setTimeLeft] = useState(5);
@@ -14,7 +14,7 @@ export default function InitialPage({ setPage }) {
       );
       return () => clearInterval(interval);
     } else {
-      return setPage("solve");
+      return setPage('solve');
     }
   });
 
@@ -30,7 +30,7 @@ export default function InitialPage({ setPage }) {
         fontSize="25px"
       ></TextField>
       <Button
-        handler={() => setPage("solve")}
+        handler={() => setPage('solve')}
         text={`Start (${timeLeft})`}
         isDisabled={false}
       ></Button>

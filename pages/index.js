@@ -1,18 +1,18 @@
-import { useState } from "react";
-import InitialPage from "./InitialPage";
-import SolvingPage from "./SolvingPage";
-import ThankYouPage from "./ThankYouPage";
+import { useState } from 'react';
+import InitialPage from './InitialPage';
+import SolvingPage from './SolvingPage';
+import ThankYouPage from './ThankYouPage';
 
 export default function Home() {
-  const [currentPage, setPage] = useState("home");
+  const [currentPage, setPage] = useState('home');
 
   const PageToShow = () => {
     switch (currentPage) {
-      case "home":
+      case 'home':
         return <InitialPage setPage={setPage}></InitialPage>;
-      case "solve":
+      case 'solve':
         return <SolvingPage setPage={setPage}></SolvingPage>;
-      case "thanks":
+      case 'thanks':
         return <ThankYouPage setPage={setPage}></ThankYouPage>;
     }
   };
@@ -25,8 +25,8 @@ export default function Home() {
 }
 
 const pageStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
 };

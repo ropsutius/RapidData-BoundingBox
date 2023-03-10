@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import SolvingCanvas from "./SolvingCanvas";
-import Logo from "./Logo";
-import Button from "./Button";
-import getObjectAfterDelay from "./api/getImage";
-import postObjectAfterDelay from "./api/postSubmission";
-import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import SolvingCanvas from './components/SolvingCanvas';
+import Logo from './components/Logo';
+import Button from './components/Button';
+import getObjectAfterDelay from './api/getImage';
+import postObjectAfterDelay from './api/postSubmission';
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
 export default function SolvingPage({ setPage }) {
   const ref = useRef(null);
@@ -64,7 +64,7 @@ export default function SolvingPage({ setPage }) {
       },
     });
 
-    setPage("thanks");
+    setPage('thanks');
   };
 
   const transformOptions = {
@@ -82,11 +82,11 @@ export default function SolvingPage({ setPage }) {
           panning={{ disabled: true }}
         >
           <TransformComponent>
-            <div style={{ display: "grid" }}>
+            <div style={{ display: 'grid' }}>
               {image && (
                 <Image
                   style={imageStyle}
-                  src={"/images/" + image.fileName}
+                  src={'/images/' + image.fileName}
                   alt="Test image"
                   width={width}
                   height={height}
@@ -116,6 +116,6 @@ export default function SolvingPage({ setPage }) {
   );
 }
 
-const testContainerStyle = { width: "100%", height: "100%" };
+const testContainerStyle = { width: '100%', height: '100%' };
 const imageStyle = { gridColumn: 1, gridRow: 1 };
 const canvasStyle = { gridColumn: 1, gridRow: 1 };

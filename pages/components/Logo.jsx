@@ -1,5 +1,5 @@
-import Image from "next/image";
-import logo from "../public/logo_with_name.svg";
+import Image from 'next/image';
+import logo from '../../public/logo_with_name.svg';
 
 export default function Logo() {
   return (
@@ -10,8 +10,8 @@ export default function Logo() {
 }
 
 const logoStyle = {
-  margin: "0 auto",
-  padding: "30px",
-  paddingBottom: "25%",
-  filter: "drop-shadow(3px 3px 5px grey)",
+  margin: '0 auto',
+  padding: '30px',
+  paddingBottom: '25%',
+  filter: 'drop-shadow(3px 3px 5px grey)',
 };

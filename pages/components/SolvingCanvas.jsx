@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 export default function SolvingCanvas(props) {
   const canvasRef = useRef(null);
@@ -6,7 +6,7 @@ export default function SolvingCanvas(props) {
   const getCoordinates = (event) => {
     const parentTransform =
       event.target.parentElement.parentNode.style.transform;
-    const array = parentTransform.split(" ");
+    const array = parentTransform.split(' ');
 
     const xOffset = Number(array[0].slice(10, -3));
     const yOffset = Number(array[1].slice(0, -3));
@@ -36,7 +36,7 @@ export default function SolvingCanvas(props) {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
+    const context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     const topLeftX = Math.min(props.mousePos.x, props.startingMousePos.x);
@@ -45,7 +45,7 @@ export default function SolvingCanvas(props) {
     const width = Math.abs(props.mousePos.x - props.startingMousePos.x);
     const height = Math.abs(props.mousePos.y - props.startingMousePos.y);
 
-    context.strokeStyle = "rgba(255, 0, 0, 1)";
+    context.strokeStyle = 'rgba(255, 0, 0, 1)';
     context.beginPath();
     context.rect(topLeftX, topLeftY, width, height);
     //context.rect(0, 0, 100, 100);
