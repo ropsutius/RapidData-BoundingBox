@@ -1,6 +1,8 @@
+@font-face {
+  font-family: "Quicksand";
+  src: url("/fonts/Quicksand-SemiBold.ttf");
+}
+
 body {
-  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
-    "Arial", sans-serif;
-  margin: 0 auto;
-  background-color: grey;
+  background-color: #edf7ff;
 }
